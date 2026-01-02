@@ -71,10 +71,7 @@
         h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-dark);
         }
 
         h2 {
@@ -149,37 +146,22 @@
             align-items: center;
         }
 
-        /* Modern Logo */
+        /* Modern Logo - SADECE YAZI */
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--darker);
+            letter-spacing: -0.5px;
         }
 
         .logo-text span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
 
         /* Modern Mobile Menu Toggle */
@@ -243,6 +225,82 @@
             width: 100%;
         }
 
+        /* Sabit WhatsApp ve Telefon Butonları - SAĞ ALT KÖŞE */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .fixed-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fixed-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 0;
+            left: 0;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .fixed-btn:hover::after {
+            transform: translateY(0);
+        }
+
+        .fixed-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #1DA851 100%);
+        }
+
+        .phone-btn {
+            background: var(--gradient);
+        }
+
+        .fixed-btn-text {
+            position: absolute;
+            right: 70px;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .fixed-btn:hover .fixed-btn-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Hero Section - Ultra Modern */
         .hero {
             padding: 10rem 0 6rem;
@@ -288,7 +346,7 @@
             max-width: 600px;
         }
 
-        /* Modern Buttons */
+        /* Modern Butons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -572,10 +630,7 @@
         }
 
         .footer-logo span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
 
         .footer-about p {
@@ -661,6 +716,11 @@
             section {
                 padding: 4rem 0;
             }
+            
+            .fixed-contact-buttons {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -728,6 +788,21 @@
             .container {
                 padding: 0 1rem;
             }
+            
+            .fixed-contact-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .fixed-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+            
+            .fixed-btn-text {
+                display: none; /* Mobilde tooltip gösterme */
+            }
         }
 
         @media (max-width: 480px) {
@@ -739,6 +814,10 @@
                 font-size: 1.5rem;
             }
             
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
             .service-card,
             .contact-card {
                 padding: 1.5rem;
@@ -746,6 +825,12 @@
             
             .section-title h2::after {
                 width: 40px;
+            }
+            
+            .fixed-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
         }
 
@@ -778,18 +863,32 @@
         .floating {
             animation: float 3s ease-in-out infinite;
         }
+        
+        /* Pulse Animation for fixed buttons */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+            }
+        }
+        
+        .phone-btn {
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body>
     <!-- Modern Header -->
     <header id="header">
         <div class="container header-container">
-            <!-- Modern Logo -->
+            <!-- Modern Logo - SADECE YAZI -->
             <a href="#home" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-sparkles"></i>
-                </div>
-                <div class="logo-text">Vuslat <span>Oto</span></div>
+                <div class="logo-text">Vuslat <span>Oto Yıkama</span></div>
             </a>
 
             <!-- Mobile Menu Toggle -->
@@ -809,11 +908,24 @@
         </div>
     </header>
 
+    <!-- Sabit WhatsApp ve Telefon Butonları -->
+    <div class="fixed-contact-buttons">
+        <a href="tel:05078636789" class="fixed-btn phone-btn">
+            <i class="fas fa-phone-alt"></i>
+            <span class="fixed-btn-text">Hemen Ara</span>
+        </a>
+        <a href="https://wa.me/905078636789?text=Merhaba,%20Vuslat%20Oto%20Yıkama%20hakkında%20bilgi%20almak%20istiyorum." 
+           class="fixed-btn whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span class="fixed-btn-text">WhatsApp'tan Yaz</span>
+        </a>
+    </div>
+
     <!-- Modern Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content fade-in">
-                <span class="hero-subtitle">VUSLAT OTO YIKAMA</span>
+                <span class="hero-subtitle">Premium Oto Detaylandırma</span>
                 <h1>Aracınız İlk Günkü<br>Parlaklığına Kavuşsun</h1>
                 <p class="hero-description">
                     Pendik ve çevre ilçelerde profesyonel oto yıkama, seramik kaplama, pasta cila ve detaylı iç temizlik hizmeti. %100 müşteri memnuniyeti garantisi ile aracınıza değer katıyoruz.
@@ -1035,7 +1147,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <div class="footer-logo">Vuslat <span>Oto</span></div>
+                    <div class="footer-logo">Vuslat <span>Oto Yıkama</span></div>
                     <p>Pendik ve çevre ilçelerde premium oto yıkama, pasta cila ve detaylandırma hizmetleri sunuyoruz. Müşteri memnuniyeti bizim için en önemli önceliktir.</p>
                     <div class="social-links">
                         <a href="#" class="social-link" aria-label="Instagram">
@@ -1079,7 +1191,6 @@
     </footer>
 
     <script>
-        // Modern JavaScript for Interactive Features
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menuToggle');
             const mainNav = document.getElementById('mainNav');
@@ -1164,8 +1275,20 @@
                 el.classList.add('floating');
             });
             
+            // Sabit butonlar için hover efekti
+            const fixedBtns = document.querySelectorAll('.fixed-btn');
+            fixedBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.1)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
             // WhatsApp click tracking
-            document.querySelectorAll('.btn-whatsapp').forEach(btn => {
+            document.querySelectorAll('.btn-whatsapp, .whatsapp-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     console.log('WhatsApp conversion tracked');
                     // Add your analytics code here
