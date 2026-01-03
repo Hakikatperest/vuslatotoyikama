@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* Modern CSS Reset */
@@ -37,6 +37,7 @@
             --success: #10b981;
             --gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             --gradient-orange: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -71,7 +72,10 @@
         h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            color: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         h2 {
@@ -127,7 +131,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(229, 231, 235, 0.8);
@@ -146,11 +150,24 @@
             align-items: center;
         }
 
-        /* Modern Logo - SADECE YAZI */
+        /* Modern Logo */
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
         }
 
         .logo-text {
@@ -225,7 +242,7 @@
             width: 100%;
         }
 
-        /* Sabit WhatsApp ve Telefon Butonları - SAĞ ALT KÖŞE */
+        /* Sabit WhatsApp ve Telefon Butonları */
         .fixed-contact-buttons {
             position: fixed;
             bottom: 2rem;
@@ -346,7 +363,66 @@
             max-width: 600px;
         }
 
-        /* Modern Butons */
+        /* Hero Image Grid */
+        .hero-images {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s 0.5s forwards;
+        }
+
+        .hero-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-img-1 {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .hero-img-2 {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .hero-img-3 {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .hero-img-4 {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .hero-img:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modern Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -436,29 +512,19 @@
         /* Services Grid - Modern Cards */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .service-card {
             background: white;
             border-radius: var(--radius-lg);
-            padding: 2.5rem;
+            overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid var(--gray-light);
             position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
+            height: 100%;
         }
 
         .service-card:hover {
@@ -466,17 +532,37 @@
             box-shadow: var(--shadow-xl);
         }
 
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
         .service-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
-            border-radius: 18px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
             color: var(--primary);
-            font-size: 1.75rem;
+            font-size: 1.5rem;
         }
 
         /* Stats Section */
@@ -505,6 +591,44 @@
         .stat-item p {
             color: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         /* Why Choose Us - Modern */
@@ -576,9 +700,38 @@
             font-size: 1.75rem;
         }
 
+        /* Map Section */
+        .map-container {
+            margin-top: 2rem;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 400px;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
         /* CTA Section - Modern */
         .cta {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            background: var(--gradient-dark);
             color: white;
             padding: 6rem 0;
             border-radius: var(--radius-lg);
@@ -627,10 +780,25 @@
             font-size: 1.75rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .footer-logo span {
             color: var(--primary);
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
         }
 
         .footer-about p {
@@ -704,6 +872,16 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-images {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+        }
+
         @media (max-width: 992px) {
             h1 {
                 font-size: 2.75rem;
@@ -886,8 +1064,11 @@
     <!-- Modern Header -->
     <header id="header">
         <div class="container header-container">
-            <!-- Modern Logo - SADECE YAZI -->
+            <!-- Modern Logo -->
             <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-car"></i>
+                </div>
                 <div class="logo-text">Vuslat <span>Oto Yıkama</span></div>
             </a>
 
@@ -901,6 +1082,7 @@
                 <ul class="nav-list">
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#services">Hizmetler</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
                     <li><a href="#why-us">Neden Biz?</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
@@ -926,7 +1108,7 @@
         <div class="container">
             <div class="hero-content fade-in">
                 <span class="hero-subtitle">Premium Yıkama & Pasta Cila</span>
-                <h1>Aracınız İlk Günkü<br>Parlaklığına Kavuşsun</h1>
+                <h1>Aracınız İlk Günkü Parlaklığına Kavuşsun</h1>
                 <p class="hero-description">
                     Pendik ve çevre ilçelerde profesyonel oto yıkama, seramik kaplama, pasta cila ve detaylı iç temizlik hizmeti. %100 müşteri memnuniyeti garantisi ile aracınıza değer katıyoruz.
                 </p>
@@ -938,6 +1120,22 @@
                     <a href="tel:05078636789" class="btn btn-secondary">
                         <i class="fas fa-phone-alt"></i> 0507 863 67 89
                     </a>
+                </div>
+            </div>
+            
+            <!-- Hero Images Grid -->
+            <div class="hero-images">
+                <div class="hero-img hero-img-1">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Premium Araç Temizliği">
+                </div>
+                <div class="hero-img hero-img-2">
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Pasta Cila Uygulaması">
+                </div>
+                <div class="hero-img hero-img-3">
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="İç Detay Temizlik">
+                </div>
+                <div class="hero-img hero-img-4">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Seramik Kaplama">
                 </div>
             </div>
         </div>
@@ -954,56 +1152,86 @@
             <div class="services-grid">
                 <!-- Service 1 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-spray-can-sparkles"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Seramik Kaplama">
                     </div>
-                    <h3>Seramik Kaplama</h3>
-                    <p>Aracınızın boyasını 2 yıl garantili koruma altına alan nano teknoloji seramik kaplama hizmeti.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-spray-can-sparkles"></i>
+                        </div>
+                        <h3>Seramik Kaplama</h3>
+                        <p>Aracınızın boyasını 2 yıl garantili koruma altına alan nano teknoloji seramik kaplama hizmeti.</p>
+                    </div>
                 </div>
                 
                 <!-- Service 2 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-gem"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1603575448878-8682c4c631d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Premium Pasta Cila">
                     </div>
-                    <h3>Premium Pasta Cila</h3>
-                    <p>Özel bileşenlerle aracınızın çiziklerini giderip, orijinal parlaklığını geri kazandırıyoruz.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Premium Pasta Cila</h3>
+                        <p>Özel bileşenlerle aracınızın çiziklerini giderip, orijinal parlaklığını geri kazandırıyoruz.</p>
+                    </div>
                 </div>
                 
                 <!-- Service 3 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-wind"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Detaylı İç Temizlik">
                     </div>
-                    <h3>Detaylı İç Temizlik</h3>
-                    <p>Deri, kumaş, halı ve tüm yüzeyler için özel temizleyicilerle hijyenik iç detaylandırma.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h3>Detaylı İç Temizlik</h3>
+                        <p>Deri, kumaş, halı ve tüm yüzeyler için özel temizleyicilerle hijyenik iç detaylandırma.</p>
+                    </div>
                 </div>
                 
                 <!-- Service 4 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-car-battery"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Motor Temizliği">
                     </div>
-                    <h3>Motor Temizliği</h3>
-                    <p>Motor bölümünün özel temizleyicilerle hijyenik ve güvenli şekilde temizlenmesi.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-car-battery"></i>
+                        </div>
+                        <h3>Motor Temizliği</h3>
+                        <p>Motor bölümünün özel temizleyicilerle hijyenik ve güvenli şekilde temizlenmesi.</p>
+                    </div>
                 </div>
                 
                 <!-- Service 5 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-tint"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Cam Hidrofobik Kaplama">
                     </div>
-                    <h3>Cam Hidrofobik Kaplama</h3>
-                    <p>Yağmurda bile mükemmel görüş sağlayan su itici cam kaplama teknolojisi.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Cam Hidrofobik Kaplama</h3>
+                        <p>Yağmurda bile mükemmel görüş sağlayan su itici cam kaplama teknolojisi.</p>
+                    </div>
                 </div>
                 
                 <!-- Service 6 -->
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-air-freshener"></i>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Ozon Tedavisi">
                     </div>
-                    <h3>Ozon Tedavisi</h3>
-                    <p>Sigara, yiyecek ve diğer kalıcı kokuları tamamen gideren profesyonel ozon uygulaması.</p>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-air-freshener"></i>
+                        </div>
+                        <h3>Ozon Tedavisi</h3>
+                        <p>Sigara, yiyecek ve diğer kalıcı kokuları tamamen gideren profesyonel ozon uygulaması.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1032,6 +1260,31 @@
             </div>
         </div>
     </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Çalışmalarımızdan Örnekler</h2>
+                <p>Profesyonel ekibimizin eserlerini keşfedin</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Araç Yıkama">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Parlatma İşlemi">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="İç Temizlik">
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Motor Temizliği">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Why Choose Us -->
     <section class="why-us" id="why-us">
@@ -1104,7 +1357,8 @@
                     </div>
                     <h3>Adres</h3>
                     <p>Kurtköy Mahallesi, Orhanlı Caddesi, No: 51/A, Pendik / İstanbul</p>
-                    <a href="https://goo.gl/maps" class="btn btn-outline" style="margin-top: 1rem;" target="_blank">
+                    <a href="https://wa.me/905078636789?text=Merhaba,%20işletmenizin%20konumunu%20alabilir%20miyim?" 
+                       class="btn btn-outline" style="margin-top: 1rem;" target="_blank">
                         <i class="fas fa-directions"></i> Yol Tarifi Al
                     </a>
                 </div>
@@ -1119,6 +1373,19 @@
                     <a href="https://wa.me/905078636789?text=Merhaba,%20randevu%20almak%20istiyorum." 
                        class="btn btn-whatsapp" style="margin-top: 1rem;" target="_blank">
                         <i class="fab fa-whatsapp"></i> Randevu Al
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Harita Konumu -->
+            <div class="map-container fade-in">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>İşletme Konumumuz</h3>
+                    <p>Kurtköy Mahallesi, Orhanlı Caddesi, No: 51/A, Pendik / İstanbul</p>
+                    <a href="https://wa.me/905078636789?text=Merhaba,%20işletmenizin%20konumunu%20alabilir%20miyim?" 
+                       class="btn btn-primary" style="margin-top: 1rem;" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp'tan Konum İste
                     </a>
                 </div>
             </div>
@@ -1147,7 +1414,12 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <div class="footer-logo">Vuslat <span>Oto Yıkama</span></div>
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div>Vuslat <span>Oto Yıkama</span></div>
+                    </div>
                     <p>Pendik ve çevre ilçelerde premium oto yıkama, pasta cila ve detaylandırma hizmetleri sunuyoruz. Müşteri memnuniyeti bizim için en önemli önceliktir.</p>
                     <div class="social-links">
                         <a href="#" class="social-link" aria-label="Instagram">
@@ -1170,6 +1442,7 @@
                     <ul>
                         <li><a href="#home">Ana Sayfa</a></li>
                         <li><a href="#services">Hizmetlerimiz</a></li>
+                        <li><a href="#gallery">Galeri</a></li>
                         <li><a href="#why-us">Neden Biz?</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
@@ -1264,7 +1537,7 @@
             }, observerOptions);
             
             // Observe elements for animation
-            document.querySelectorAll('.service-card, .feature, .contact-card').forEach(el => {
+            document.querySelectorAll('.service-card, .feature, .contact-card, .gallery-item').forEach(el => {
                 observer.observe(el);
             });
             
@@ -1300,6 +1573,14 @@
                 link.addEventListener('click', function() {
                     console.log('Phone call conversion tracked');
                     // Add your analytics code here
+                });
+            });
+            
+            // Özel WhatsApp mesajı için "Yol Tarifi Al" butonu
+            document.querySelectorAll('a[href*="işletmenizin konumunu"]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Konum isteği gönderildi');
+                    // Burada konum isteği için özel tracking ekleyebilirsiniz
                 });
             });
         });
